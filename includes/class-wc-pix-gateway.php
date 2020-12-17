@@ -249,11 +249,29 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 			echo wpautop(wptexturize($this->instructions));
 		}
 		if (!empty($pix)) {
-			echo '<img src="' . $pix['image'] . '" alt="QR Code" />';
+			echo '
+			<input type="hidden" value="'.$pix['link'].'" id="copiar">
+			<img  style="cursor:pointer;" onclick="copyCode()" src="' . $pix['image'] . '" alt="QR Code" />
+			
+			';
 		}
 		if (!empty($pix)) {
-			echo '<br><p>Link Pix para copiar e pagar: '.$pix['link'].'</p>';
+			echo '<br><span onclick="copyCode()" style="cursor:pointer;border: 0.5px solid;border-color: #d8d7d7;padding: 5px;background: #f5f5f5;">Clique aqui para copiar o Code </span><br>';         
 		}
+		?>
+		<script>
+			function copyCode() {
+				var copyText = document.getElementById("copiar");
+				copyText.type = "text";
+				copyText.select();
+				copyText.setSelectionRange(0, 99999)
+				document.execCommand("copy"); 
+				copyText.type = "hidden";
+				alert("Code copiado!")
+				return false;
+			  }
+		</script> 
+		<?php  
 		if ($this->whatsapp) {
 			echo '<br><a target="_blank" href=" https://wa.me/'.$this->whatsapp.'?text=Segue%20meu%20comprovante">Compartilhe o comprovante com o WhatsApp '.$this->whatsapp.' clicando aqui.</a>';
 		}
@@ -271,7 +289,8 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 		$pix->moeda(986); // Real brasileiro (BRL) - Conforme ISO 4217: https://pt.wikipedia.org/wiki/ISO_4217
 		$pix->info('Descritivo');
 		$pix->txId($order->order_key);
-		$link = $pix->toLink();
+		//$link = $pix->toLink();
+		$link = $pix->toCode();
 		$image = $pix->toImage();
 		$pix = array(
 			'image' => $image,

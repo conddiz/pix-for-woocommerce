@@ -197,6 +197,18 @@ class QRCode
     }
 
     /**
+     * Outputs the Payment Link
+     *
+     * @see https://www.bcb.gov.br/content/estabilidadefinanceira/forumpireunioes/AnexoI-PadroesParaIniciacaodoPix.pdf
+     *
+     * @return string
+     */
+    public function toCode()
+    {
+        return $this->__toString();
+    }
+
+    /**
      * Renders and saves the QRCode image to a file
      *
      * @param string $filename The output filename
@@ -211,7 +223,7 @@ class QRCode
             'imageBase64' => true,
             'imageTransparent' => false,
         ]);
-        $qrCode = new \chillerlan\QRCode\QRCode($options);
+        $qrCode = new \chillerlan\QRCode\QRCode($options); 
         $image = $qrCode->render($this->__toString());
 
         return $image;
