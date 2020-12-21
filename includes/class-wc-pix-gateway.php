@@ -41,12 +41,17 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 		$this->whatsapp     			= $this->get_option('whatsapp');
 		$this->debug            = $this->get_option('debug');
 
+		//Load script files
+		add_action( 'wp_enqueue_scripts', array( $this, 'wcpix_load_scripts'));
+
 		// Actions
 		add_action('woocommerce_update_options_payment_gateways_' . $this->id, array($this, 'process_admin_options'));
 		add_action('woocommerce_update_options_payment_gateways_' . $this->id, array($this, 'save_account_details'));
 		add_action('woocommerce_thankyou_' . $this->id, array($this, 'thankyou_page'));
 
-		add_action('woocommerce_order_details_after_order_table', array($this, 'order_page'));
+		if (is_account_page()){
+			add_action('woocommerce_order_details_after_order_table', array($this, 'order_page'));
+		}
 
 		// Active logs.
 		if ('yes' === $this->debug) {
@@ -56,6 +61,17 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 				$this->log = new WC_Logger();
 			}
 		}
+	}
+
+	/**
+	 * Load the script files.
+	 */
+	public function wcpix_load_scripts(){
+		// load the main css scripts file
+		wp_enqueue_style( 'wcpix-styles-css', plugins_url( '/css/styles.css', __FILE__ ) );
+		
+		// load the main js scripts file
+		wp_enqueue_script( 'wcpix-main-js', plugins_url( '/js/main.js', __FILE__ ), array('jquery'));
 	}
 
 	/**
@@ -258,10 +274,11 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 		}
 		if (!empty($pix)) { 
 			?>
-			<div style="text-align:center;" >
+			<div class="wcpix-container">
 				<input type="hidden" value="<?php echo $pix['link']; ?>" id="copiar">
-				<img  style="cursor:pointer; display: initial;" onclick="copyCode()" src="<?php echo $pix['image']; ?>" alt="QR Code" />
-				<br><span class="button" onclick="copyCode()">Clique aqui para copiar o Code </span><br>
+				<img  style="cursor:pointer; display: initial;" class="wcpix-img-copy-code" onclick="copyCode()" src="<?php echo $pix['image']; ?>" alt="QR Code" />
+				<br><button class="button wcpix-button-copy-code" onclick="copyCode()"><?php echo __('Clique aqui para copiar o Código', 'woocommerce-pix'); ?> </button><br>
+				<div class="wcpix-response-output inactive" aria-hidden="true" style=""><?php echo __('O código foi copiado para a área de transferência.', 'woocommerce-pix'); ?></div>
 			</div> 
 			<script>
 				function copyCode() {
@@ -271,13 +288,19 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 					copyText.setSelectionRange(0, 99999)
 					document.execCommand("copy"); 
 					copyText.type = "hidden";
-					alert("Code copiado!")
+
+					if (jQuery("div.wcpix-response-output")){
+						jQuery("div.wcpix-response-output").show();
+					}else{
+						alert('O código foi copiado para a área de transferência.');
+					}
+
 					return false;
 				}
 			</script> 
 			<?php  
 			if ($this->whatsapp) {
-				echo '<br>Você pode compartilhar conosco o comprovante via WhatsApp <a target="_blank" href=" https://wa.me/'.$this->whatsapp.'?text=Segue%20meu%20comprovante">clicando aqui.</a>';
+				echo '<br>' . __('Você pode compartilhar conosco o comprovante via WhatsApp.', 'woocommerce-pix') .' <a target="_blank" href=" https://wa.me/'.$this->whatsapp.'?text=Segue%20meu%20comprovante">clicando aqui.</a>';
 			}
 		} 
 	}	 
