@@ -71,7 +71,7 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 		wp_enqueue_style( 'wcpix-styles-css', plugins_url( '/css/styles.css', __FILE__ ) );
 		
 		// load the main js scripts file
-		wp_enqueue_script( 'wcpix-main-js', plugins_url( '/js/main.js', __FILE__ ), array('jquery'));
+		wp_enqueue_script( 'wcpix-main-js', plugins_url( '/js/main.js', __FILE__ ), array(), '1.0.0', true );
 	}
 
 	/**
@@ -276,31 +276,13 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 			?>
 			<div class="wcpix-container">
 				<input type="hidden" value="<?php echo $pix['link']; ?>" id="copiar">
-				<img  style="cursor:pointer; display: initial;" class="wcpix-img-copy-code" onclick="copyCode()" src="<?php echo $pix['image']; ?>" alt="QR Code" />
-				<br><button class="button wcpix-button-copy-code" onclick="copyCode()"><?php echo __('Clique aqui para copiar o Código', 'woocommerce-pix'); ?> </button><br>
+				<img class="wcpix-img-copy-code" src="<?php echo $pix['image']; ?>" alt="QR Code" />
+				<br><button class="button wcpix-button-copy-code" ><?php echo __('Clique aqui para copiar o Código', 'woocommerce-pix'); ?> </button><br>
 				<div class="wcpix-response-output inactive" aria-hidden="true" style=""><?php echo __('O código foi copiado para a área de transferência.', 'woocommerce-pix'); ?></div>
 			</div> 
-			<script>
-				function copyCode() {
-					var copyText = document.getElementById("copiar");
-					copyText.type = "text";
-					copyText.select();
-					copyText.setSelectionRange(0, 99999)
-					document.execCommand("copy"); 
-					copyText.type = "hidden";
-
-					if (jQuery("div.wcpix-response-output")){
-						jQuery("div.wcpix-response-output").show();
-					}else{
-						alert('O código foi copiado para a área de transferência.');
-					}
-
-					return false;
-				}
-			</script> 
 			<?php  
 			if ($this->whatsapp) {
-				echo '<br>' . __('Você pode compartilhar conosco o comprovante via WhatsApp.', 'woocommerce-pix') .' <a target="_blank" href=" https://wa.me/'.$this->whatsapp.'?text=Segue%20meu%20comprovante">clicando aqui.</a>';
+				echo '<p>' . __('Você pode compartilhar conosco o comprovante via WhatsApp.', 'woocommerce-pix') .' <a target="_blank" href=" https://wa.me/'.$this->whatsapp.'?text=Segue%20meu%20comprovante">clicando aqui.</a></p>';
 			}
 		} 
 	}	 
