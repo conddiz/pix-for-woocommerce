@@ -27,7 +27,7 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 		$this->icon               = apply_filters('woocommerce_offline_icon', '');
 		$this->has_fields         = false;
 		$this->method_title       = __('Pix', $this->domain);
-		$this->method_description = __('Take payments in person via Pix.', $this->domain);
+		$this->method_description = __('Receba pagamentos via PIX', $this->domain);
 
 		// Load the settings.
 		$this->init_form_fields();
@@ -140,33 +140,33 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 	{
 		$this->form_fields = array(
 			'enabled'              => array(
-				'title'   => __('Enable/Disable', 'woocommerce-pix'),
+				'title'   => __('Habilitar/Desabilitar', 'woocommerce-pix'),
 				'type'    => 'checkbox',
-				'label'   => __('Enable Pix', 'woocommerce-pix'),
+				'label'   => __('Habilitar Pix', 'woocommerce-pix'),
 				'default' => 'yes',
 			),
 			'title'                => array(
-				'title'       => __('Title', 'woocommerce-pix'),
+				'title'       => __('Título', 'woocommerce-pix'),
 				'type'        => 'text',
-				'description' => __('This controls the title which the user sees during checkout.', 'woocommerce-pix'),
+				'description' => __('Representa o título visível para o usuário comprador', 'woocommerce-pix'),
 				'desc_tip'    => true,
 				'default'     => __('Pix', 'woocommerce-pix'),
 			),
 			'description'          => array(
-				'title'       => __('Description', 'woocommerce-pix'),
+				'title'       => __('Descrição', 'woocommerce-pix'),
 				'type'        => 'textarea',
-				'description' => __('This controls the description which the user sees during checkout.', 'woocommerce-pix'),
+				'description' => __('Representa a descrição que o usuário verá na tela de checkout', 'woocommerce-pix'),
 				'default'     => __('Ao finalizar a compra, iremos gerar o código Pix para pagamento na próxima tela e disponibilizar um número WhatsApp para você compartilhar o seu comprovante.', 'woocommerce-pix'),
 			),
 			'integration'          => array(
-				'title'       => __('Integration', 'woocommerce-pix'),
+				'title'       => __('Integração', 'woocommerce-pix'),
 				'type'        => 'title',
 				'description' => '',
 			),
 			'key'                => array(
 				'title'       => __('Chave Pix', 'woocommerce-pix'),
 				'type'        => 'text',
-				'description' => __('Please enter your Pix key. This is needed to process the payment.', 'woocommerce-pix'),
+				'description' => __('Por favor, informe sua chave PIX. Ela é necessária para poder processar os pagamentos.', 'woocommerce-pix'),
 				'default'     => '',
 			),
 			'whatsapp'                => array(
@@ -184,10 +184,10 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 			'debug'                => array(
 				'title'       => __('Debug Log', 'woocommerce-pix'),
 				'type'        => 'checkbox',
-				'label'       => __('Enable logging', 'woocommerce-pix'),
+				'label'       => __('Habilitar logging', 'woocommerce-pix'),
 				'default'     => 'no',
 				/* translators: %s: log page link */
-				'description' => sprintf(__('Log Pix events, such as API requests, inside %s', 'woocommerce-pix'), $this->get_log_view()),
+				'description' => sprintf(__('Cria logs relacionados ao PIX em %s', 'woocommerce-pix'), $this->get_log_view()),
 			),
 		);
 	}

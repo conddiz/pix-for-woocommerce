@@ -12,6 +12,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <div class="error inline">
-	<p><strong><?php _e( 'Pix Disabled', 'woocommerce-pix' ); ?></strong>: <?php _e( 'You should inform your key.', 'woocommerce-pix' ); ?>
+	<p><strong><?php _e( 'Pix Desabilitado', 'woocommerce-pix' ); ?></strong>: <?php _e( 'É necessário informar sua chave PIX', 'woocommerce-pix' ); ?>
 	</p>
 </div>

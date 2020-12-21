@@ -12,6 +12,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <div class="error inline">
-	<p><strong><?php _e( 'Pix Disabled', 'woocommerce-pix' ); ?></strong>: <?php printf( __( 'Currency <code>%s</code> is not supported. Works only with Brazilian Real.', 'woocommerce-pix' ), get_woocommerce_currency() ); ?>
+	<p><strong><?php _e( 'Pix Desabilitado', 'woocommerce-pix' ); ?></strong>: <?php printf( __( 'Moeda <code>%s</code> não suportada. É aceito apenas BRL', 'woocommerce-pix' ), get_woocommerce_currency() ); ?>
 	</p>
 </div>
