@@ -69,7 +69,7 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 	public function wcpix_load_scripts(){
 		// load the main css scripts file
 		wp_enqueue_style( 'wcpix-styles-css', plugins_url( '/css/styles.css', __FILE__ ) );
-		
+
 		// load the main js scripts file
 		wp_enqueue_script( 'wcpix-main-js', plugins_url( '/js/main.js', __FILE__ ), array('jquery'));
 	}
@@ -266,27 +266,27 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 		if($order->payment_method != 'pix_gateway')
 		{
 			return;
-		} 
+		}
 
 		$pix = $this->generate_pix($order_id);
 		if ($this->instructions) {
 			echo wpautop(wptexturize($this->instructions));
 		}
-		if (!empty($pix)) { 
+		if (!empty($pix)) {
 			?>
 			<div class="wcpix-container">
 				<input type="hidden" value="<?php echo $pix['link']; ?>" id="copiar">
 				<img  style="cursor:pointer; display: initial;" class="wcpix-img-copy-code" onclick="copyCode()" src="<?php echo $pix['image']; ?>" alt="QR Code" />
 				<br><button class="button wcpix-button-copy-code" onclick="copyCode()"><?php echo __('Clique aqui para copiar o Código', 'woocommerce-pix'); ?> </button><br>
 				<div class="wcpix-response-output inactive" aria-hidden="true" style=""><?php echo __('O código foi copiado para a área de transferência.', 'woocommerce-pix'); ?></div>
-			</div> 
+			</div>
 			<script>
 				function copyCode() {
 					var copyText = document.getElementById("copiar");
 					copyText.type = "text";
 					copyText.select();
 					copyText.setSelectionRange(0, 99999)
-					document.execCommand("copy"); 
+					document.execCommand("copy");
 					copyText.type = "hidden";
 
 					if (jQuery("div.wcpix-response-output")){
@@ -297,13 +297,13 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 
 					return false;
 				}
-			</script> 
-			<?php  
+			</script>
+			<?php
 			if ($this->whatsapp) {
 				echo '<br>' . __('Você pode compartilhar conosco o comprovante via WhatsApp.', 'woocommerce-pix') .' <a target="_blank" href=" https://wa.me/'.$this->whatsapp.'?text=Segue%20meu%20comprovante">clicando aqui.</a>';
 			}
-		} 
-	}	 
+		}
+	}
 	/**
 	 * Order Page message.
 	 *
@@ -321,7 +321,7 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 	 */
 	public function thankyou_page($order_id)
 	{
-		return $this->render_pix($order_id);	
+		return $this->render_pix($order_id);
 	}
 
 	public function generate_pix($order_id)
@@ -330,13 +330,10 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 		$pix = new QRCode();
 		$pix->chave($this->key);
 		$pix->valor($order->total);
-		// $pix->lojista('Fulano de Tal');
 		$pix->cidade($order->city);
 		$pix->pais($order->country);
 		$pix->moeda(986); // Real brasileiro (BRL) - Conforme ISO 4217: https://pt.wikipedia.org/wiki/ISO_4217
-		$pix->info('Descritivo');
 		$pix->txId($order->order_key);
-		//$link = $pix->toLink();
 		$link = $pix->toCode();
 		$image = $pix->toImage();
 		$pix = array(
