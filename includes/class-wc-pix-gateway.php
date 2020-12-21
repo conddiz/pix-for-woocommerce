@@ -46,6 +46,8 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 		add_action('woocommerce_update_options_payment_gateways_' . $this->id, array($this, 'save_account_details'));
 		add_action('woocommerce_thankyou_' . $this->id, array($this, 'thankyou_page'));
 
+		add_action('woocommerce_order_details_after_order_table', array($this, 'order_page'));
+
 		// Active logs.
 		if ('yes' === $this->debug) {
 			if (function_exists('wc_get_logger')) {
@@ -238,43 +240,65 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 	}
 
 	/**
+	 * Render Pix code.
+	 *
+	 * @param int $order_id Order ID.
+	 */
+	public function render_pix($order_id)
+	{
+		$order = wc_get_order($order_id);
+		if($order->payment_method != 'pix_gateway')
+		{
+			return;
+		} 
+
+		$pix = $this->generate_pix($order_id);
+		if ($this->instructions) {
+			echo wpautop(wptexturize($this->instructions));
+		}
+		if (!empty($pix)) { 
+			?>
+			<div style="text-align:center;" >
+				<input type="hidden" value="<?php echo $pix['link']; ?>" id="copiar">
+				<img  style="cursor:pointer; display: initial;" onclick="copyCode()" src="<?php echo $pix['image']; ?>" alt="QR Code" />
+				<br><span class="button" onclick="copyCode()">Clique aqui para copiar o Code </span><br>
+			</div> 
+			<script>
+				function copyCode() {
+					var copyText = document.getElementById("copiar");
+					copyText.type = "text";
+					copyText.select();
+					copyText.setSelectionRange(0, 99999)
+					document.execCommand("copy"); 
+					copyText.type = "hidden";
+					alert("Code copiado!")
+					return false;
+				}
+			</script> 
+			<?php  
+			if ($this->whatsapp) {
+				echo '<br>Você pode compartilhar conosco o comprovante via WhatsApp <a target="_blank" href=" https://wa.me/'.$this->whatsapp.'?text=Segue%20meu%20comprovante">clicando aqui.</a>';
+			}
+		} 
+	}	 
+	/**
+	 * Order Page message.
+	 *
+	 * @param int $order_id Order ID.
+	 */
+	public function order_page($order_id)
+	{
+		return $this->render_pix($order_id);
+	}
+
+	/**
 	 * Thank You page message.
 	 *
 	 * @param int $order_id Order ID.
 	 */
 	public function thankyou_page($order_id)
 	{
-		$pix = $this->generate_pix($order_id);
-		if ($this->instructions) {
-			echo wpautop(wptexturize($this->instructions));
-		}
-		if (!empty($pix)) {
-			echo '
-			<input type="hidden" value="'.$pix['link'].'" id="copiar">
-			<img  style="cursor:pointer;" onclick="copyCode()" src="' . $pix['image'] . '" alt="QR Code" />
-			
-			';
-		}
-		if (!empty($pix)) {
-			echo '<br><span onclick="copyCode()" style="cursor:pointer;border: 0.5px solid;border-color: #d8d7d7;padding: 5px;background: #f5f5f5;">Clique aqui para copiar o Code </span><br>';         
-		}
-		?>
-		<script>
-			function copyCode() {
-				var copyText = document.getElementById("copiar");
-				copyText.type = "text";
-				copyText.select();
-				copyText.setSelectionRange(0, 99999)
-				document.execCommand("copy"); 
-				copyText.type = "hidden";
-				alert("Code copiado!")
-				return false;
-			  }
-		</script> 
-		<?php  
-		if ($this->whatsapp) {
-			echo '<br><a target="_blank" href=" https://wa.me/'.$this->whatsapp.'?text=Segue%20meu%20comprovante">Compartilhe o comprovante com o WhatsApp '.$this->whatsapp.' clicando aqui.</a>';
-		}
+		return $this->render_pix($order_id);	
 	}
 
 	public function generate_pix($order_id)
