@@ -3,7 +3,7 @@
 /**
  * Plugin Name: InCuca Tech - Pix for WooCommerce
  * Plugin URI: https://github.com/InCuca/woocommerce-pix
- * Description: Acept payments with Pix technology.
+ * Description: Accept payments with Pix technology.
  * Author: InCuca Tech
  * Author URI: https://incuca.net
  * Version: 1.0.0

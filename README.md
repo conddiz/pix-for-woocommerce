@@ -11,6 +11,8 @@
 
 == Description ==
 
+Adds Pix technology as a gateway on WooCommerce.
+
 > **Requires: WooCommerce 2.1+**
 
 == Installation ==
@@ -20,8 +22,13 @@
 3. Activate the plugin through the **Plugins** menu in WordPress
 4. Go to **WooCommerce &gt; Settings &gt; Payments** and select "Pix" to configure
 
-== Frequently Asked Questions ==
-Email - suporte@incuca.com.br
+== Contribute ==
+
+You can contribute with the code on [GitHub](https://github.com/InCuca/woocommerce-pix).
+
+== Credits ==
+
+* [Claudio Sanches](https://claudiosanches.com/) - we base this plugin on one of his plugins
 
 == Changelog ==
 
