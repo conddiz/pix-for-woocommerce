@@ -21,10 +21,6 @@ class WC_Pix {
 			add_filter( 'woocommerce_payment_gateways', array( __CLASS__, 'add_gateway' ) );
 			add_filter( 'woocommerce_available_payment_gateways', array( __CLASS__, 'hides_when_is_outside_brazil' ) );
 			add_filter( 'plugin_action_links_' . plugin_basename( WC_PIX_PLUGIN_FILE ), array( __CLASS__, 'plugin_action_links' ) );
-
-			if ( is_admin() ) {
-				add_action( 'admin_notices', array( __CLASS__, 'ecfb_missing_notice' ) );
-			}
 		} else {
 			add_action( 'admin_notices', array( __CLASS__, 'woocommerce_missing_notice' ) );
 		}

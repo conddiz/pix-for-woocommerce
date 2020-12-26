@@ -4,7 +4,7 @@
  *
  * @package Pix_For_WooCommerce/Classes/Gateway
  */
-class CRC16
+class ICPFW_CRC16
 {
     /**
      * Returns the ASCII value of the nth char in the given string

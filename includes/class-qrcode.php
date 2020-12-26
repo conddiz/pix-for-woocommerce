@@ -1,22 +1,22 @@
 <?php
 
-define('PAYLOAD_FORMAT_INDICATOR', 0);
-define('POINT_OF_INITIATION_METHOD', 1);
-define('MERCHANT_ACCOUNT_INFORMATION', 26);
-define('MERCHANT_CATEGORY_CODE', 52);
-define('TRANSACTION_CURRENCY', 53);
-define('TRANSACTION_AMOUNT', 54);
-define('COUNTRY_CODE', 58);
-define('MERCHANT_NAME', 59);
-define('MERCHANT_CITY', 60);
-define('ADDITIONAL_DATA_FIELD_TEMPLATE', 62);
-define('CRC16', 63);
-define('GUI', 0);
-define('CHAVE', 1);
-define('INFO', 2);
-define('TXID', 5);
+define('ICPFW_PAYLOAD_FORMAT_INDICATOR', 0);
+define('ICPFW_POINT_OF_INITIATION_METHOD', 1);
+define('ICPFW_MERCHANT_ACCOUNT_INFORMATION', 26);
+define('ICPFW_MERCHANT_CATEGORY_CODE', 52);
+define('ICPFW_TRANSACTION_CURRENCY', 53);
+define('ICPFW_TRANSACTION_AMOUNT', 54);
+define('ICPFW_COUNTRY_CODE', 58);
+define('ICPFW_MERCHANT_NAME', 59);
+define('ICPFW_MERCHANT_CITY', 60);
+define('ICPFW_ADDITIONAL_DATA_FIELD_TEMPLATE', 62);
+define('ICPFW_CRC16', 63);
+define('ICPFW_GUI', 0);
+define('ICPFW_CHAVE', 1);
+define('ICPFW_INFO', 2);
+define('ICPFW_TXID', 5);
 
-define('METHOD_ONCE', 12);
+define('ICPFW_METHOD_ONCE', 12);
 
 /**
  * QRCode Generator Class based on BR Code Spec
@@ -26,28 +26,28 @@ define('METHOD_ONCE', 12);
  *
  * @package Pix_For_WooCommerce/Classes/Gateway
  */
-class QRCode
+class ICPFW_QRCode
 {
     /**
      * Constructor function to initialize default values
      */
     public function __construct()
     {
-        $merchant_account_information = new EMV();
-        $merchant_account_information->set(GUI, 'br.gov.bcb.pix');
-        $merchant_account_information->set(CHAVE, '');
+        $ICPFW_MERCHANT_ACCOUNT_INFORMATION = new ICPFW_EMV();
+        $ICPFW_MERCHANT_ACCOUNT_INFORMATION->set(ICPFW_GUI, 'br.gov.bcb.pix');
+        $ICPFW_MERCHANT_ACCOUNT_INFORMATION->set(ICPFW_CHAVE, '');
 
-        $additional_data_field_template = new EMV();
-        $additional_data_field_template->set(TXID, '***');
+        $ICPFW_ADDITIONAL_DATA_FIELD_TEMPLATE = new ICPFW_EMV();
+        $ICPFW_ADDITIONAL_DATA_FIELD_TEMPLATE->set(ICPFW_TXID, '***');
 
-        $this->emv = new EMV();
-        $this->emv->set(PAYLOAD_FORMAT_INDICATOR, '01');
-        $this->emv->set(MERCHANT_ACCOUNT_INFORMATION, $merchant_account_information);
-        $this->emv->set(ADDITIONAL_DATA_FIELD_TEMPLATE, $additional_data_field_template);
-        $this->emv->set(MERCHANT_CATEGORY_CODE, '0000');
-        $this->emv->set(TRANSACTION_CURRENCY, '986');
-        $this->emv->set(COUNTRY_CODE, 'BR');
-        $this->emv->set(CRC16, 'FFFF');
+        $this->emv = new ICPFW_EMV();
+        $this->emv->set(ICPFW_PAYLOAD_FORMAT_INDICATOR, '01');
+        $this->emv->set(ICPFW_MERCHANT_ACCOUNT_INFORMATION, $ICPFW_MERCHANT_ACCOUNT_INFORMATION);
+        $this->emv->set(ICPFW_ADDITIONAL_DATA_FIELD_TEMPLATE, $ICPFW_ADDITIONAL_DATA_FIELD_TEMPLATE);
+        $this->emv->set(ICPFW_MERCHANT_CATEGORY_CODE, '0000');
+        $this->emv->set(ICPFW_TRANSACTION_CURRENCY, '986');
+        $this->emv->set(ICPFW_COUNTRY_CODE, 'BR');
+        $this->emv->set(ICPFW_CRC16, 'FFFF');
     }
 
     /**
@@ -58,9 +58,9 @@ class QRCode
      */
     public function chave($chave)
     {
-        $merchant_account_information = $this->emv->get(MERCHANT_ACCOUNT_INFORMATION);
-        $merchant_account_information->set(CHAVE, $chave);
-        $this->emv->set(MERCHANT_ACCOUNT_INFORMATION, $merchant_account_information);
+        $ICPFW_MERCHANT_ACCOUNT_INFORMATION = $this->emv->get(ICPFW_MERCHANT_ACCOUNT_INFORMATION);
+        $ICPFW_MERCHANT_ACCOUNT_INFORMATION->set(ICPFW_CHAVE, $chave);
+        $this->emv->set(ICPFW_MERCHANT_ACCOUNT_INFORMATION, $ICPFW_MERCHANT_ACCOUNT_INFORMATION);
         return $this;
     }
 
@@ -74,7 +74,7 @@ class QRCode
      */
     public function moeda($moeda)
     {
-        $this->emv->set(TRANSACTION_CURRENCY, str_pad($moeda, 3, '0', STR_PAD_LEFT));
+        $this->emv->set(ICPFW_TRANSACTION_CURRENCY, str_pad($moeda, 3, '0', STR_PAD_LEFT));
         return $this;
     }
 
@@ -86,7 +86,7 @@ class QRCode
      */
     public function lojista($lojista)
     {
-        $this->emv->set(MERCHANT_NAME, $lojista);
+        $this->emv->set(ICPFW_MERCHANT_NAME, $lojista);
         return $this;
     }
 
@@ -98,7 +98,7 @@ class QRCode
      */
     public function cidade($cidade)
     {
-        $this->emv->set(MERCHANT_CITY, $cidade);
+        $this->emv->set(ICPFW_MERCHANT_CITY, $cidade);
         return $this;
     }
 
@@ -112,7 +112,7 @@ class QRCode
      */
     public function pais($pais)
     {
-        $this->emv->set(COUNTRY_CODE, mb_substr($pais, 0, 2));
+        $this->emv->set(ICPFW_COUNTRY_CODE, mb_substr($pais, 0, 2));
         return $this;
     }
 
@@ -125,7 +125,7 @@ class QRCode
     public function valor($valor)
     {
         $valor = number_format($valor, 2, '.', '');
-        $this->emv->set(TRANSACTION_AMOUNT, $valor);
+        $this->emv->set(ICPFW_TRANSACTION_AMOUNT, $valor);
         return $this;
     }
 
@@ -137,9 +137,9 @@ class QRCode
      */
     public function info($info)
     {
-        $merchant_account_information = $this->emv->get(MERCHANT_ACCOUNT_INFORMATION);
-        $merchant_account_information->set(INFO, $info);
-        $this->emv->set(MERCHANT_ACCOUNT_INFORMATION, $merchant_account_information);
+        $ICPFW_MERCHANT_ACCOUNT_INFORMATION = $this->emv->get(ICPFW_MERCHANT_ACCOUNT_INFORMATION);
+        $ICPFW_MERCHANT_ACCOUNT_INFORMATION->set(ICPFW_INFO, $info);
+        $this->emv->set(ICPFW_MERCHANT_ACCOUNT_INFORMATION, $ICPFW_MERCHANT_ACCOUNT_INFORMATION);
         return $this;
     }
 
@@ -151,9 +151,9 @@ class QRCode
      */
     public function txId($txId)
     {
-        $additional_data_field_template = $this->emv->get(ADDITIONAL_DATA_FIELD_TEMPLATE);
-        $additional_data_field_template->set(TXID, $txId);
-        $this->emv->set(ADDITIONAL_DATA_FIELD_TEMPLATE, $additional_data_field_template);
+        $ICPFW_ADDITIONAL_DATA_FIELD_TEMPLATE = $this->emv->get(ICPFW_ADDITIONAL_DATA_FIELD_TEMPLATE);
+        $ICPFW_ADDITIONAL_DATA_FIELD_TEMPLATE->set(ICPFW_TXID, $txId);
+        $this->emv->set(ICPFW_ADDITIONAL_DATA_FIELD_TEMPLATE, $ICPFW_ADDITIONAL_DATA_FIELD_TEMPLATE);
         return $this;
     }
 
@@ -166,7 +166,7 @@ class QRCode
     public function codigoCategoria($codigoCategoria)
     {
         $this->emv->set(
-            MERCHANT_CATEGORY_CODE,
+            ICPFW_MERCHANT_CATEGORY_CODE,
             mb_substr(str_pad($codigoCategoria, 4, '0', STR_PAD_LEFT), 0, 4)
         );
         return $this;

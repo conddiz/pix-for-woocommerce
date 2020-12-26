@@ -39,27 +39,16 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 		$this->instructions     = $this->get_option('instructions');
 		$this->key     			= $this->get_option('key');
 		$this->whatsapp     			= $this->get_option('whatsapp');
-		$this->debug            = $this->get_option('debug');
 
 		//Load script files
 		add_action( 'wp_enqueue_scripts', array( $this, 'wcpix_load_scripts'));
 
 		// Actions
 		add_action('woocommerce_update_options_payment_gateways_' . $this->id, array($this, 'process_admin_options'));
-		add_action('woocommerce_update_options_payment_gateways_' . $this->id, array($this, 'save_account_details'));
 		add_action('woocommerce_thankyou_' . $this->id, array($this, 'thankyou_page'));
 
 		if (is_account_page()){
 			add_action('woocommerce_order_details_after_order_table', array($this, 'order_page'));
-		}
-
-		// Active logs.
-		if ('yes' === $this->debug) {
-			if (function_exists('wc_get_logger')) {
-				$this->log = wc_get_logger();
-			} else {
-				$this->log = new WC_Logger();
-			}
 		}
 	}
 
@@ -180,14 +169,6 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 				'type'        => 'textarea',
 				'description' => __('Instruções na página de obrigado pela compra', 'woocommerce-pix'),
 				'default'     => 'Utilize o seu aplicativo favorito do Pix para ler o QR Code ou copiar o código abaixo e efetuar o pagamento.',
-			),
-			'debug'                => array(
-				'title'       => __('Debug Log', 'woocommerce-pix'),
-				'type'        => 'checkbox',
-				'label'       => __('Habilitar logging', 'woocommerce-pix'),
-				'default'     => 'no',
-				/* translators: %s: log page link */
-				'description' => sprintf(__('Cria logs relacionados ao PIX em %s', 'woocommerce-pix'), $this->get_log_view()),
 			),
 		);
 	}
@@ -327,7 +308,7 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 	public function generate_pix($order_id)
 	{
 		$order = wc_get_order($order_id);
-		$pix = new QRCode();
+		$pix = new ICPFW_QRCode();
 		$pix->chave($this->key);
 		$pix->valor($order->total);
 		$pix->cidade($order->city);
