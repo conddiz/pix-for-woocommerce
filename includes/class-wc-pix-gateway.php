@@ -3,7 +3,7 @@
 /**
  * Gateway class
  *
- * @package WooCommerce_Pix/Classes/Gateway
+ * @package Pix_For_WooCommerce/Classes/Gateway
  * @version 1.0.0
  */
 

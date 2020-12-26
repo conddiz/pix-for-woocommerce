@@ -2,7 +2,7 @@
 /**
  * Admin options screen.
  *
- * @package WooCommerce_Pix/Admin/Settings
+ * @package Pix_For_WooCommerce/Admin/Settings
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

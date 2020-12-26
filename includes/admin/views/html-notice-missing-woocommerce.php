@@ -3,7 +3,7 @@
 /**
  * Missing WooCommerce notice.
  *
- * @package WooCommerce_Pix/Admin/Notices
+ * @package Pix_For_WooCommerce/Admin/Notices
  */
 
 if (!defined('ABSPATH')) {

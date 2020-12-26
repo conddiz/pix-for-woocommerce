@@ -2,7 +2,7 @@
 /**
  * Utility class for validating CRC16 CCITT False
  *
- * @package WooCommerce_Pix/Classes/Gateway
+ * @package Pix_For_WooCommerce/Classes/Gateway
  */
 class CRC16
 {

@@ -24,7 +24,7 @@ define('METHOD_ONCE', 12);
  * @see https://www.bcb.gov.br/content/estabilidadefinanceira/spb_docs/ManualBRCode.pdf
  * @see https://www.bcb.gov.br/content/estabilidadefinanceira/forumpireunioes/AnexoI-PadroesParaIniciacaodoPix.pdf
  *
- * @package WooCommerce_Pix/Classes/Gateway
+ * @package Pix_For_WooCommerce/Classes/Gateway
  */
 class QRCode
 {
@@ -223,7 +223,7 @@ class QRCode
             'imageBase64' => true,
             'imageTransparent' => false,
         ]);
-        $qrCode = new \chillerlan\QRCode\QRCode($options); 
+        $qrCode = new \chillerlan\QRCode\QRCode($options);
         $image = $qrCode->render($this->__toString());
 
         return $image;

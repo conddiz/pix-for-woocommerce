@@ -2,7 +2,7 @@
 /**
  * Admin View: Notice - Currency not supported.
  *
- * @package WooCommerce_Pix/Admin/Notices
+ * @package Pix_For_WooCommerce/Admin/Notices
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

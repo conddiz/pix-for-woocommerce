@@ -2,7 +2,7 @@
 /**
  * Plugin's main class
  *
- * @package WooCommerce_Pix
+ * @package Pix_For_WooCommerce
  */
 
 /**

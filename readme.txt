@@ -1,4 +1,4 @@
-=== WooCommerce Pix ===
+=== InCuca Tech - Pix for WooCommerce ===
 
  - Contributors: incuca, samoaste, dejean-echeverrya, rafengineer, paulodanieldiasdilva
  - Tags: woocommerce, payment gateway, gateway, pix

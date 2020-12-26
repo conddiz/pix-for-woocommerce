@@ -10,7 +10,7 @@
  * Tested up to: 5.5.6
  * License: GNU General Public License v3.0
  *
- * @package WooCommerce_Pix
+ * @package Pix_For_WooCommerce
  */
 
 defined('ABSPATH') or exit;
