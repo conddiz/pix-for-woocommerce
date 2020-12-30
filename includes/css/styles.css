@@ -1,9 +1,14 @@
 .wcpix-container{
-    text-align: center;    
+    text-align: center;
+    padding-bottom: 20px; 
 }
 .wcpix-container .wcpix-response-output {
     margin: 2em 0.5em 1em;
     padding: 0.2em 1em;
     border: 2px solid #46b450;
     display: none;
+}
+.wcpix-container img.wcpix-img-copy-code {
+    cursor:pointer;
+    display: initial;
 }
