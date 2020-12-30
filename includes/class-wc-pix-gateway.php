@@ -3,7 +3,7 @@
 /**
  * Gateway class
  *
- * @package Pix_For_WooCommerce/Classes/Gateway
+ * @package WooCommerce_Pix/Classes/Gateway
  * @version 1.0.0
  */
 
@@ -27,7 +27,7 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 		$this->icon               = apply_filters('woocommerce_offline_icon', '');
 		$this->has_fields         = false;
 		$this->method_title       = __('Pix', $this->domain);
-		$this->method_description = __('Receba pagamentos via PIX', $this->domain);
+		$this->method_description = __('Take payments in person via Pix.', $this->domain);
 
 		// Load the settings.
 		$this->init_form_fields();
@@ -115,33 +115,33 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 	{
 		$this->form_fields = array(
 			'enabled'              => array(
-				'title'   => __('Habilitar/Desabilitar', 'woocommerce-pix'),
+				'title'   => __('Enable/Disable', 'woocommerce-pix'),
 				'type'    => 'checkbox',
-				'label'   => __('Habilitar Pix', 'woocommerce-pix'),
+				'label'   => __('Enable Pix', 'woocommerce-pix'),
 				'default' => 'yes',
 			),
 			'title'                => array(
-				'title'       => __('Título', 'woocommerce-pix'),
+				'title'       => __('Title', 'woocommerce-pix'),
 				'type'        => 'text',
-				'description' => __('Representa o título visível para o usuário comprador', 'woocommerce-pix'),
+				'description' => __('This controls the title which the user sees during checkout.', 'woocommerce-pix'),
 				'desc_tip'    => true,
 				'default'     => __('Pix', 'woocommerce-pix'),
 			),
 			'description'          => array(
-				'title'       => __('Descrição', 'woocommerce-pix'),
+				'title'       => __('Description', 'woocommerce-pix'),
 				'type'        => 'textarea',
-				'description' => __('Representa a descrição que o usuário verá na tela de checkout', 'woocommerce-pix'),
+				'description' => __('This controls the description which the user sees during checkout.', 'woocommerce-pix'),
 				'default'     => __('Ao finalizar a compra, iremos gerar o código Pix para pagamento na próxima tela e disponibilizar um número WhatsApp para você compartilhar o seu comprovante.', 'woocommerce-pix'),
 			),
 			'integration'          => array(
-				'title'       => __('Integração', 'woocommerce-pix'),
+				'title'       => __('Integration', 'woocommerce-pix'),
 				'type'        => 'title',
 				'description' => '',
 			),
 			'key'                => array(
 				'title'       => __('Chave Pix', 'woocommerce-pix'),
 				'type'        => 'text',
-				'description' => __('Por favor, informe sua chave PIX. Ela é necessária para poder processar os pagamentos.', 'woocommerce-pix'),
+				'description' => __('Please enter your Pix key. This is needed to process the payment.', 'woocommerce-pix'),
 				'default'     => '',
 			),
 			'whatsapp'                => array(
@@ -233,13 +233,13 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 		if($order->payment_method != 'pix_gateway')
 		{
 			return;
-		}
+		} 
 
 		$pix = $this->generate_pix($order_id);
 		if ($this->instructions) {
 			echo wpautop(wptexturize($this->instructions));
 		}
-		if (!empty($pix)) {
+		if (!empty($pix)) { 
 			?>
 			<div class="wcpix-container">
 				<input type="hidden" value="<?php echo $pix['link']; ?>" id="copiar">
@@ -251,8 +251,8 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 			if ($this->whatsapp) {
 				echo '<p>' . __('Você pode compartilhar conosco o comprovante via WhatsApp.', 'woocommerce-pix') .' <a target="_blank" href=" https://wa.me/'.$this->whatsapp.'?text=Segue%20meu%20comprovante">clicando aqui.</a></p>';
 			}
-		}
-	}
+		} 
+	}	 
 	/**
 	 * Order Page message.
 	 *
@@ -270,13 +270,13 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 	 */
 	public function thankyou_page($order_id)
 	{
-		return $this->render_pix($order_id);
+		return $this->render_pix($order_id);	
 	}
 
 	public function generate_pix($order_id)
 	{
 		$order = wc_get_order($order_id);
-		$pix = new ICPFW_QRCode();
+		$pix = new QRCode();
 		$pix->chave($this->key);
 		$pix->valor($order->total);
 		$pix->cidade($order->city);
