@@ -18,12 +18,25 @@ class WC_Pix {
 		if ( class_exists( 'WC_Payment_Gateway' ) ) {
 			self::includes();
 
+			add_action( 'wp_enqueue_scripts', array( __CLASS__, 'wcpix_load_scripts'));
+
 			add_filter( 'woocommerce_payment_gateways', array( __CLASS__, 'add_gateway' ) );
 			add_filter( 'woocommerce_available_payment_gateways', array( __CLASS__, 'hides_when_is_outside_brazil' ) );
 			add_filter( 'plugin_action_links_' . plugin_basename( WC_PIX_PLUGIN_FILE ), array( __CLASS__, 'plugin_action_links' ) );
 		} else {
 			add_action( 'admin_notices', array( __CLASS__, 'woocommerce_missing_notice' ) );
 		}
+	}
+
+	/**
+	 * Set Script files.
+	 */
+	public static function wcpix_load_scripts(){
+		// load the main css scripts file
+		wp_enqueue_style( 'wcpix-styles-css', plugins_url( '/css/styles.css', __FILE__ ) );
+		
+		// load the main js scripts file
+		wp_enqueue_script( 'wcpix-main-js', plugins_url( '/js/main.js', __FILE__ ), array(), '1.0.0', true );
 	}
 
 	/**
