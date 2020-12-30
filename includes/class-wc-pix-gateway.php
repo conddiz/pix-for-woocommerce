@@ -40,9 +40,6 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 		$this->key     			= $this->get_option('key');
 		$this->whatsapp     			= $this->get_option('whatsapp');
 
-		//Load script files
-		add_action( 'wp_enqueue_scripts', array( $this, 'wcpix_load_scripts'));
-
 		// Actions
 		add_action('woocommerce_update_options_payment_gateways_' . $this->id, array($this, 'process_admin_options'));
 		add_action('woocommerce_thankyou_' . $this->id, array($this, 'thankyou_page'));
@@ -50,17 +47,6 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 		if (is_account_page()){
 			add_action('woocommerce_order_details_after_order_table', array($this, 'order_page'));
 		}
-	}
-
-	/**
-	 * Load the script files.
-	 */
-	public function wcpix_load_scripts(){
-		// load the main css scripts file
-		wp_enqueue_style( 'wcpix-styles-css', plugins_url( '/css/styles.css', __FILE__ ) );
-
-		// load the main js scripts file
-		wp_enqueue_script( 'wcpix-main-js', plugins_url( '/js/main.js', __FILE__ ), array('jquery'));
 	}
 
 	/**
