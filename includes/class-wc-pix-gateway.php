@@ -261,24 +261,6 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 				<br><button class="button wcpix-button-copy-code" onclick="copyCode()"><?php echo __('Clique aqui para copiar o Código', 'woocommerce-pix'); ?> </button><br>
 				<div class="wcpix-response-output inactive" aria-hidden="true" style=""><?php echo __('O código foi copiado para a área de transferência.', 'woocommerce-pix'); ?></div>
 			</div>
-			<script>
-				function copyCode() {
-					var copyText = document.getElementById("copiar");
-					copyText.type = "text";
-					copyText.select();
-					copyText.setSelectionRange(0, 99999)
-					document.execCommand("copy");
-					copyText.type = "hidden";
-
-					if (jQuery("div.wcpix-response-output")){
-						jQuery("div.wcpix-response-output").show();
-					}else{
-						alert('O código foi copiado para a área de transferência.');
-					}
-
-					return false;
-				}
-			</script>
 			<?php
 			if ($this->whatsapp) {
 				echo '<br>' . __('Você pode compartilhar conosco o comprovante via WhatsApp.', 'woocommerce-pix') .' <a target="_blank" href=" https://wa.me/'.$this->whatsapp.'?text=Segue%20meu%20comprovante">clicando aqui.</a>';
