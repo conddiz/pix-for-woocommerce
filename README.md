@@ -1,36 +1,87 @@
+
 === Pix for WooCommerce ===
 
- - Contributors: incuca, samoaste, dejean-echeverrya, rafengineer, paulodanieldiasdilva
- - Tags: woocommerce, payment gateway, gateway, pix
- - Requires WooCommerce at least: 2.1
- - Tested up to: 5.6
- - Requires PHP: 7.4
- - Stable Tag: 1.0.0
- - License: GPLv3.0
- - License URI: http://www.gnu.org/licenses/gpl-3.0.html
+  
+
+- Contributors: incuca, samoaste, dejean-echeverrya, rafengineer, paulodanieldiasdilva
+
+- Tags: woocommerce, payment gateway, gateway, pix
+
+- Requires WooCommerce at least: 2.1
+
+- Tested up to: 5.6
+
+- Requires PHP: 7.4
+
+- Stable Tag: 1.0.0
+
+- License: GPLv3.0
+
+- License URI: http://www.gnu.org/licenses/gpl-3.0.html
+
+  
 
 == Description ==
+  
+Plugin WooCommerce para receber seus pagamentos via [PIX](https://www.bb.com.br/pbb/pagina-inicial/pix#/).
 
-Adds Pix technology as a gateway on WooCommerce.
+O que esse plugin faz?
 
-> **Requires: WooCommerce 2.1+**
+- Adiciona um Gateway de pagamento para o WooCommerce. 	 
+- Facilita e  agiliza seus pagamentos eliminando um intermediário.
+- Facilita o contato com o cliente utilizando o WhatsApp, o aplicativo de mensagens mais utilizado do Brasil.
+	
+Veja como é fácil fazer suas vendas com o PIX:
+
+1. Você instala o Plugin.
+2. Cadastra sua chave PIX .
+3. O cliente finaliza a compra informando o PIX como meio de pagamento.
+4. O cliente efetua o pagamento e envia o comprovante.
+5. Você conclui a venda no Painel WooCommerce.
+6. Envia o produto ao cliente.
+
+Quer ver um vídeo? 
+
+Corre para a página da [IncucaTech](https://youtube.com/users/incucatech) no YouTube e veja um tutorial de instalação.
+
+  
+>  **Requires: WooCommerce 2.1+**
+  
 
 == Installation ==
 
-1. Be sure you're running WooCommerce 2.1+ in your shop.
-2. You can: 1 - upload the entire `woocommerce-pix` folder to the `/wp-content/plugins/` directory, 2 - upload the .zip file with the plugin under **Plugins &gt; Add New &gt; Upload**
-3. Activate the plugin through the **Plugins** menu in WordPress
-4. Go to **WooCommerce &gt; Settings &gt; Payments** and select "Pix" to configure
+ 1. Instalar o WooCommerce 2.1 + na sua loja, se já tem instalado pode  
+    ignorar esse passo.  
+    
+ 2. Instalar e ativar o Plugin PIX for WooCommerce, há 3 maneiras de instalar:
+ 
+  - Baixar e descompactar o arquivo `*.zip` na pasta  `/wp-content/plugins/` ;
+  - Fazer o upload do arquivo `*.zip`  via plugins do WordPress em  **Plugins &gt; Add New &gt; Upload**
+  - Instalar e ativar o plugin por meio do menu **Plugins** no WordPress
+
+3. Vá para  **WooCommerce &gt; Settings &gt; Payments** e selecione "Pix" para configurar.
+4. Na página de Pagamentos adicione sua chave PIX e um número  WhatsApp para receber os comprovantes dos seus clientes.
 
 == Contribute ==
 
+  
+
 You can contribute with the code on [GitHub](https://github.com/InCuca/woocommerce-pix).
+
+  
 
 == Credits ==
 
-* [Claudio Sanches](https://claudiosanches.com/) - we base this plugin on one of his plugins
+  
+
+*  [Claudio Sanches](https://claudiosanches.com/) - we base this plugin on one of his plugins
+
+  
 
 == Changelog ==
 
+  
+
 = 2020.12.14 - version 1.0.0 =
- * Initial Release
+
+* Initial Release
