@@ -3,7 +3,7 @@
 
   
 
-- Contributors: incuca, samoaste, dejean-echeverrya, rafengineer, paulodanieldiasdilva
+- Contributors: incuca, samoaste, dejean-echeverrya, rafengineer, paulodanieldiasdilva, dionmaicon
 
 - Tags: woocommerce, payment gateway, gateway, pix
 
@@ -29,21 +29,16 @@ O que esse plugin faz?
 
 - Adiciona um Gateway de pagamento para o WooCommerce. 	 
 - Facilita e  agiliza seus pagamentos eliminando um intermediário.
-- Facilita o contato com o cliente utilizando o WhatsApp, o aplicativo de mensagens mais utilizado do Brasil.
+- Permite ao cliente envio de comprovantes via o WhatsApp, Telegram ou E-mail.
 	
 Veja como é fácil fazer suas vendas com o PIX:
 
 1. Você instala o Plugin.
-2. Cadastra sua chave PIX .
+2. Cadastra sua chave PIX.
 3. O cliente finaliza a compra informando o PIX como meio de pagamento.
 4. O cliente efetua o pagamento e envia o comprovante.
 5. Você conclui a venda no Painel WooCommerce.
 6. Envia o produto ao cliente.
-
-Quer ver um vídeo? 
-
-Corre para a página da [IncucaTech](https://youtube.com/users/incucatech) no YouTube e veja um tutorial de instalação.
-
   
 >  **Requires: WooCommerce 2.1+**
   
