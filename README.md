@@ -29,7 +29,7 @@ O que esse plugin faz?
 
 - Adiciona um Gateway de pagamento para o WooCommerce. 	 
 - Facilita e  agiliza seus pagamentos eliminando um intermediário.
-- Permite ao cliente envio de comprovantes via o WhatsApp, Telegram ou E-mail.
+- Permite ao cliente envio de comprovantes via WhatsApp, Telegram ou E-mail.
 	
 Veja como é fácil fazer suas vendas com o PIX:
 
@@ -37,7 +37,7 @@ Veja como é fácil fazer suas vendas com o PIX:
 2. Cadastra sua chave PIX.
 3. O cliente finaliza a compra informando o PIX como meio de pagamento.
 4. O cliente efetua o pagamento e envia o comprovante.
-5. Você conclui a venda no Painel WooCommerce.
+5. Você conclui a venda no Painel de administração do WooCommerce.
 6. Envia o produto ao cliente.
   
 >  **Requires: WooCommerce 2.1+**
@@ -48,7 +48,7 @@ Veja como é fácil fazer suas vendas com o PIX:
  1. Instalar o WooCommerce 2.1 + na sua loja, se já tem instalado pode  
     ignorar esse passo.  
     
- 2. Instalar e ativar o Plugin PIX for WooCommerce, há 3 maneiras de instalar:
+ 2. Instalar e ativar o Plugin PIX for WooCommerce, há três maneiras de instalar:
  
   - Baixar e descompactar o arquivo `*.zip` na pasta  `/wp-content/plugins/` ;
   - Fazer o upload do arquivo `*.zip`  via plugins do WordPress em  **Plugins &gt; Add New &gt; Upload**
