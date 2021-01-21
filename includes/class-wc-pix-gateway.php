@@ -125,7 +125,7 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 	public function is_available()
 	{
 		// Test if is valid for use.
-		$available = 'yes' === $this->get_option('enabled') && ('' !== $this->get_whatsapp() || '' !== $this->get_telegram()) && '' !== $this->get_key() && $this->using_supported_currency();
+		$available = 'yes' === $this->get_option('enabled') && '' !== $this->get_key() && $this->using_supported_currency();
 
 		return $available;
 	}
@@ -293,7 +293,7 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 			<div class="wcpix-container">
 				<input type="hidden" value="<?php echo $pix['link']; ?>" id="copiar">
 				<img  style="cursor:pointer; display: initial;" class="wcpix-img-copy-code" onclick="copyCode()" src="<?php echo $pix['image']; ?>" alt="QR Code" />
-				<br><button class="button wcpix-button-copy-code" onclick="copyCode()"><?php echo __('Clique aqui para copiar o Código', 'woocommerce-pix'); ?> </button><br>
+				<br><button class="button wcpix-button-copy-code" style="margin-bottom: 20px;" onclick="copyCode()"><?php echo __('Clique aqui para copiar o Código', 'woocommerce-pix'); ?> </button><br>
 				<div class="wcpix-response-output inactive" aria-hidden="true" style=""><?php echo __('O código foi copiado para a área de transferência.', 'woocommerce-pix'); ?></div>
 			</div>
 			<script>
@@ -327,8 +327,8 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 					echo ' <a style="margin-right: 15px;" target="_blank" href="mailto:'.$this->email.'">Email.</a>';
 				}
 			}
-			
-			
+
+
 		}
 	}
 	/**
