@@ -1,25 +1,23 @@
 
 === Pix for WooCommerce ===
 
+Contributors: incuca, samoaste, dejean-echeverrya, rafengineer, paulodanieldiasdilva, dionmaicon
 
+Tags: woocommerce, payment gateway, gateway, pix
 
-- Contributors: incuca, samoaste, dejean-echeverrya, rafengineer, paulodanieldiasdilva, dionmaicon
+Requires WooCommerce at least: 2.1
 
-- Tags: woocommerce, payment gateway, gateway, pix
+Tested up to: 5.6
 
-- Requires WooCommerce at least: 2.1
+Requires PHP: 7.4
 
-- Tested up to: 5.6
+Stable Tag: 1.1.0
 
-- Requires PHP: 7.4
+License: GPLv3.0
 
-- Stable Tag: 1.1.0
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-- License: GPLv3.0
-
-- License URI: http://www.gnu.org/licenses/gpl-3.0.html
-
-
+Adiciona Pix como método de pagamento no WooCommerce.
 
 == Description ==
 
