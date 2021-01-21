@@ -38,7 +38,9 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 		$this->description      = $this->get_option('description');
 		$this->instructions     = $this->get_option('instructions');
 		$this->key     			= $this->get_option('key');
-		$this->whatsapp     			= $this->get_option('whatsapp');
+		$this->whatsapp     	= $this->get_option('whatsapp');
+		$this->telegram     	= $this->get_option('telegram');
+		$this->email     		= $this->get_option('email');
 
 		//Load script files
 		add_action( 'wp_enqueue_scripts', array( $this, 'wcpix_load_scripts'));
@@ -84,6 +86,26 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 	}
 
 	/**
+	 * Get Telegram.
+	 *
+	 * @return string
+	 */
+	public function get_telegram()
+	{
+		return $this->telegram;
+	}
+
+	/**
+	 * Get Email.
+	 *
+	 * @return string
+	 */
+	public function get_email()
+	{
+		return $this->email;
+	}
+
+	/**
 	 * Get key.
 	 *
 	 * @return string
@@ -103,7 +125,7 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 	public function is_available()
 	{
 		// Test if is valid for use.
-		$available = 'yes' === $this->get_option('enabled') && '' !== $this->get_whatsapp() && '' !== $this->get_key() && $this->using_supported_currency();
+		$available = 'yes' === $this->get_option('enabled') && '' !== $this->get_key() && $this->using_supported_currency();
 
 		return $available;
 	}
@@ -163,6 +185,19 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 				'type'        => 'text',
 				'description' => __('Seu número de WhatsApp será informado ao cliente para compartilhar o comprovante de pagamento. Modelo: 5548999999999', 'woocommerce-pix'),
 				'default'     => '',
+			),
+			'telegram'                => array(
+				'title'       => __('Telegram para contato', 'woocommerce-pix'),
+				'type'        => 'text',
+				'description' => __('Seu username do Telegram será informado ao cliente para compartilhar o comprovante de pagamento. Informe o username sem @.
+				Exemplo: jondoe.', 'woocommerce-pix'),
+				'default'     => '',
+			),
+			'email'                => array(
+				'title'       => __('Email para contato', 'woocommerce-pix'),
+				'type'        => 'email',
+				'description' => __('Seu email será informado ao cliente para compartilhar o comprovante de pagamento.', 'woocommerce-pix'),
+				'default'     => get_option('admin_email'),
 			),
 			'instructions' => array(
 				'title'       => __('Instruções', 'woocommerce-pix'),
@@ -258,7 +293,7 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 			<div class="wcpix-container">
 				<input type="hidden" value="<?php echo $pix['link']; ?>" id="copiar">
 				<img  style="cursor:pointer; display: initial;" class="wcpix-img-copy-code" onclick="copyCode()" src="<?php echo $pix['image']; ?>" alt="QR Code" />
-				<br><button class="button wcpix-button-copy-code" onclick="copyCode()"><?php echo __('Clique aqui para copiar o Código', 'woocommerce-pix'); ?> </button><br>
+				<br><button class="button wcpix-button-copy-code" style="margin-bottom: 20px;" onclick="copyCode()"><?php echo __('Clique aqui para copiar o Código', 'woocommerce-pix'); ?> </button><br>
 				<div class="wcpix-response-output inactive" aria-hidden="true" style=""><?php echo __('O código foi copiado para a área de transferência.', 'woocommerce-pix'); ?></div>
 			</div>
 			<script>
@@ -280,9 +315,20 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 				}
 			</script>
 			<?php
-			if ($this->whatsapp) {
-				echo '<br>' . __('Você pode compartilhar conosco o comprovante via WhatsApp.', 'woocommerce-pix') .' <a target="_blank" href=" https://wa.me/'.$this->whatsapp.'?text=Segue%20meu%20comprovante">clicando aqui.</a>';
+			if ($this->whatsapp || $this->telegram || $this->email) {
+				echo '<br>' . __('Você pode compartilhar conosco o comprovante via:', 'woocommerce-pix');
+				if ($this->whatsapp) {
+					echo ' <a style="margin-right: 15px;" target="_blank" href="https://wa.me/'.$this->whatsapp.'?text=Segue%20meu%20comprovante"> WhatsApp </a>';
+				}
+				if ($this->telegram) {
+					echo ' <a style="margin-right: 15px;" target="_blank" href="https://t.me/'.$this->telegram.'?text=Segue%20meu%20comprovante">Telegram </a>';
+				}
+				if ($this->email) {
+					echo ' <a style="margin-right: 15px;" target="_blank" href="mailto:'.$this->email.'">Email.</a>';
+				}
 			}
+
+
 		}
 	}
 	/**
