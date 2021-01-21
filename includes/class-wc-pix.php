@@ -44,7 +44,7 @@ class WC_Pix {
 	 */
 	public static function plugin_action_links( $links ) {
 		$plugin_links   = array();
-		$plugin_links[] = '<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=checkout&section=pix' ) ) . '">Configuração</a>';
+		$plugin_links[] = '<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=checkout&section=pix_gateway' ) ) . '">Configuração</a>';
 
 		return array_merge( $plugin_links, $links );
 	}
