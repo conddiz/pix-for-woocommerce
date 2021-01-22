@@ -11,7 +11,7 @@ Tested up to: 5.6
 
 Requires PHP: 7.4
 
-Stable Tag: 1.1.0
+Stable Tag: 1.1.1
 
 License: GPLv3.0
 

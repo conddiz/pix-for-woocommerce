@@ -4,7 +4,7 @@
  * Gateway class
  *
  * @package Pix_For_WooCommerce/Classes/Gateway
- * @version 1.1.0
+ * @version 1.1.1
  */
 
 if (!defined('ABSPATH')) {
@@ -37,6 +37,9 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 		$this->title            = $this->get_option('title');
 		$this->description      = $this->get_option('description');
 		$this->instructions     = $this->get_option('instructions');
+		$this->key     			= $this->get_option('key');
+		$this->merchant     	= $this->get_option('merchant');
+		$this->city     		= $this->get_option('city');
 		$this->key     			= $this->get_option('key');
 		$this->whatsapp     	= $this->get_option('whatsapp');
 		$this->telegram     	= $this->get_option('telegram');
@@ -116,6 +119,26 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 	}
 
 	/**
+	 * Get lojista.
+	 *
+	 * @return string
+	 */
+	public function get_merchant()
+	{
+		return $this->merchant;
+	}
+
+	/**
+	 * Get city.
+	 *
+	 * @return string
+	 */
+	public function get_city()
+	{
+		return $this->city;
+	}
+
+	/**
 	 * Returns a value indicating the the Gateway is available or not. It's called
 	 * automatically by WooCommerce before allowing customers to use the gateway
 	 * for payment.
@@ -175,10 +198,25 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 				'description' => '',
 			),
 			'key'                => array(
-				'title'       => __('Chave Pix', 'woocommerce-pix'),
+				'title'       => __('Chave Pix (obrigatório)', 'woocommerce-pix'),
 				'type'        => 'text',
 				'description' => __('Por favor, informe sua chave PIX. Ela é necessária para poder processar os pagamentos.', 'woocommerce-pix'),
 				'default'     => '',
+				'required'	  => true,
+			),
+			'merchant'                => array(
+				'title'       => __('Nome do titular (obrigatório)', 'woocommerce-pix'),
+				'type'        => 'text',
+				'description' => __('Por favor, informe o nome do titular da conta bancária da chave PIX cadastrada.', 'woocommerce-pix'),
+				'default'     => '',
+				'required'	  => true,
+			),
+			'city'                => array(
+				'title'       => __('Cidade do titular (obrigatório)', 'woocommerce-pix'),
+				'type'        => 'text',
+				'description' => __('Por favor, informe a cidade do titular da conta bancária da chave PIX cadastrada.', 'woocommerce-pix'),
+				'default'     => '',
+				'required'	  => true,
 			),
 			'whatsapp'                => array(
 				'title'       => __('WhatsApp para contato', 'woocommerce-pix'),
@@ -293,7 +331,8 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 			<div class="wcpix-container">
 				<input type="hidden" value="<?php echo $pix['link']; ?>" id="copiar">
 				<img  style="cursor:pointer; display: initial;" class="wcpix-img-copy-code" onclick="copyCode()" src="<?php echo $pix['image']; ?>" alt="QR Code" />
-				<br><button class="button wcpix-button-copy-code" style="margin-bottom: 20px;" onclick="copyCode()"><?php echo __('Clique aqui para copiar o Código', 'woocommerce-pix'); ?> </button><br>
+				<br><br><p class="wcpix-p"><?php echo $pix['link']; ?></p>
+				<br><button class="button wcpix-button-copy-code" style="margin-bottom: 20px;" onclick="copyCode()"><?php echo __('Clique aqui para copiar o Código acima', 'woocommerce-pix'); ?> </button><br>
 				<div class="wcpix-response-output inactive" aria-hidden="true" style=""><?php echo __('O código foi copiado para a área de transferência.', 'woocommerce-pix'); ?></div>
 			</div>
 			<script>
@@ -357,10 +396,10 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 		$pix = new ICPFW_QRCode();
 		$pix->chave($this->key);
 		$pix->valor($order->total);
-		$pix->cidade($order->city);
-		$pix->pais($order->country);
+		$pix->cidade($this->city);
+		$pix->lojista($this->merchant);
 		$pix->moeda(986); // Real brasileiro (BRL) - Conforme ISO 4217: https://pt.wikipedia.org/wiki/ISO_4217
-		$pix->txId($order->order_key);
+		$pix->txId('ID-'.$order_id);
 		$link = $pix->toCode();
 		$image = $pix->toImage();
 		$pix = array(

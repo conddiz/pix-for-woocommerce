@@ -1,7 +1,7 @@
 <?php
 
-define('ICPFW_PAYLOAD_FORMAT_INDICATOR', 0);
-define('ICPFW_POINT_OF_INITIATION_METHOD', 1);
+define('ICPFW_PAYLOAD_FORMAT_INDICATOR', 00);
+define('ICPFW_POINT_OF_INITIATION_METHOD', 01);
 define('ICPFW_MERCHANT_ACCOUNT_INFORMATION', 26);
 define('ICPFW_MERCHANT_CATEGORY_CODE', 52);
 define('ICPFW_TRANSACTION_CURRENCY', 53);
@@ -42,6 +42,7 @@ class ICPFW_QRCode
 
         $this->emv = new ICPFW_EMV();
         $this->emv->set(ICPFW_PAYLOAD_FORMAT_INDICATOR, '01');
+        $this->emv->set(ICPFW_POINT_OF_INITIATION_METHOD, '12');
         $this->emv->set(ICPFW_MERCHANT_ACCOUNT_INFORMATION, $ICPFW_MERCHANT_ACCOUNT_INFORMATION);
         $this->emv->set(ICPFW_ADDITIONAL_DATA_FIELD_TEMPLATE, $ICPFW_ADDITIONAL_DATA_FIELD_TEMPLATE);
         $this->emv->set(ICPFW_MERCHANT_CATEGORY_CODE, '0000');
@@ -179,7 +180,7 @@ class ICPFW_QRCode
      *
      * @return string
      */
-    public function __toString()
+    public function toString()
     {
         return $this->emv->__toString();
     }
@@ -193,7 +194,7 @@ class ICPFW_QRCode
      */
     public function toLink()
     {
-        return 'https://pix.bcb.gov.br/qr/' . base64_encode($this->__toString());
+        return 'https://pix.bcb.gov.br/qr/' . base64_encode($this->toString());
     }
 
     /**
@@ -205,7 +206,7 @@ class ICPFW_QRCode
      */
     public function toCode()
     {
-        return $this->__toString();
+        return $this->toString();
     }
 
     /**
@@ -224,7 +225,7 @@ class ICPFW_QRCode
             'imageTransparent' => false,
         ]);
         $qrCode = new \chillerlan\QRCode\QRCode($options);
-        $image = $qrCode->render($this->__toString());
+        $image = $qrCode->render($this->toString());
 
         return $image;
     }

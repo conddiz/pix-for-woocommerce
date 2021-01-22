@@ -4,7 +4,7 @@ Tags: woocommerce, payment gateway, gateway, pix
 Requires WooCommerce at least: 2.1
 Tested up to: 5.6
 Requires PHP: 7.4
-Stable Tag: 1.1.0
+Stable Tag: 1.1.1
 License: GPLv3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -73,3 +73,7 @@ You can contribute with the code on [GitHub](https://github.com/InCuca/woocommer
 = 2021.01.21 - version 1.1.0 =
 
 * Add Telegram and E-mail as sharing methods
+
+= 2021.01.21 - version 1.1.1 =
+
+* Fix QR Code generation for Itaú

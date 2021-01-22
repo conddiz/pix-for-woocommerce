@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Utility class for validating CRC16 CCITT False
  *
@@ -13,7 +14,8 @@ class ICPFW_CRC16
      * @param integer $ordem Char position
      * @return interger
      */
-    public function byte($texto, $ordem) {
+    public function byte($texto, $ordem)
+    {
         return ord(substr($texto, $ordem, 1));
     }
 
@@ -25,23 +27,26 @@ class ICPFW_CRC16
      * @param string $texto The payload
      * @return string(4) The 4 bytes string containing the hex CRC16 representation
      */
-    public function calculate($texto) {
-        // Conforme seção 4.7.3 da especificação QR Code EMVCo-Merchant-Presented v.1.1
-        $crc = $valorInicial = 0xFFFF;
-        $polinomio = 0x1021;
+    public function calculate($texto)
+    {
 
-        // Conforme ISO/IEC 13239
-        $tam = mb_strlen($texto);
-        for ($contador = 0; $contador < $tam; $contador++) {
-            $crc ^= $this->byte($texto, $contador) << 8;
-            for ($i = 0; $i < 8; $i++) {
-                if ($crc & 0x8000) {
-                    $crc = ($crc << 1) ^ $polinomio;
-                } else {
-                    $crc = $crc << 1;
+        $response   = 0xFFFF;
+        $polynomial = 0x1021;
+
+        // Conforme seção 4.7.3 da especificação QR Code EMVCo-Merchant-Presented v.1.1
+        if (($length = strlen($texto)) > 0) {
+            for ($offset = 0; $offset < $length; $offset++) {
+                $response ^= (ord($texto[$offset]) << 8);
+
+                for ($bitwise = 0; $bitwise < 8; $bitwise++) {
+                    if (($response <<= 1) & 0x10000) {
+                        $response ^= $polynomial;
+                    }
+
+                    $response &= 0xFFFF;
                 }
             }
         }
-        return strtoupper(dechex($crc & $valorInicial));
+        return strtoupper( dechex( $response ) );
     }
 }
