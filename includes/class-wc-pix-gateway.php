@@ -4,7 +4,7 @@
  * Gateway class
  *
  * @package Pix_For_WooCommerce/Classes/Gateway
- * @version 1.1.1
+ * @version 1.1.2
  */
 
 if (!defined('ABSPATH')) {
@@ -210,6 +210,9 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 				'description' => __('Por favor, informe o nome do titular da conta bancária da chave PIX cadastrada.', 'woocommerce-pix'),
 				'default'     => '',
 				'required'	  => true,
+				'custom_attributes' => [
+					'maxlength' => 25
+				]
 			),
 			'city'                => array(
 				'title'       => __('Cidade do titular (obrigatório)', 'woocommerce-pix'),
@@ -217,6 +220,9 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 				'description' => __('Por favor, informe a cidade do titular da conta bancária da chave PIX cadastrada.', 'woocommerce-pix'),
 				'default'     => '',
 				'required'	  => true,
+				'custom_attributes' => [
+					'maxlength' => 25
+				]
 			),
 			'whatsapp'                => array(
 				'title'       => __('WhatsApp para contato', 'woocommerce-pix'),

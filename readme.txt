@@ -4,7 +4,7 @@ Tags: woocommerce, payment gateway, gateway, pix
 Requires WooCommerce at least: 2.1
 Tested up to: 5.6
 Requires PHP: 7.4
-Stable Tag: 1.1.1
+Stable Tag: 1.1.2
 License: GPLv3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
