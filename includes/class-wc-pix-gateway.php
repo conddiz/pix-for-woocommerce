@@ -376,13 +376,15 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 
 		}
 	}
+
 	/**
 	 * Order Page message.
 	 *
-	 * @param int $order_id Order ID.
+	 * @param int $order Order.
 	 */
-	public function order_page($order_id)
+	public function order_page($order)
 	{
+		$order_id = $order->get_id();
 		return $this->render_pix($order_id);
 	}
 
