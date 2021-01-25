@@ -16,7 +16,7 @@ define('ICPFW_CHAVE', 1);
 define('ICPFW_INFO', 2);
 define('ICPFW_TXID', 5);
 
-define('ICPFW_METHOD_ONCE', 11);
+define('ICPFW_METHOD_ONCE', 12);
 
 /**
  * QRCode Generator Class based on BR Code Spec
@@ -42,7 +42,7 @@ class ICPFW_QRCode
 
         $this->emv = new ICPFW_EMV();
         $this->emv->set(ICPFW_PAYLOAD_FORMAT_INDICATOR, '01');
-        $this->emv->set(ICPFW_POINT_OF_INITIATION_METHOD, '11');
+        $this->emv->set(ICPFW_POINT_OF_INITIATION_METHOD, '12');
         $this->emv->set(ICPFW_MERCHANT_ACCOUNT_INFORMATION, $ICPFW_MERCHANT_ACCOUNT_INFORMATION);
         $this->emv->set(ICPFW_ADDITIONAL_DATA_FIELD_TEMPLATE, $ICPFW_ADDITIONAL_DATA_FIELD_TEMPLATE);
         $this->emv->set(ICPFW_MERCHANT_CATEGORY_CODE, '0000');
