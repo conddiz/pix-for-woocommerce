@@ -76,4 +76,8 @@ You can contribute with the code on [GitHub](https://github.com/InCuca/woocommer
 
 = 2021.01.21 - version 1.1.1 =
 
-* Fix QR Code generation for Itaú
+* Add required fields for compatibility with more banks
+
+= 2021.01.21 - version 1.1.2 =
+
+* Remove stylesheet loading
