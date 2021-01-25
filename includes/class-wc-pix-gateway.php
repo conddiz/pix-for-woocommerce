@@ -61,8 +61,6 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 	 * Load the script files.
 	 */
 	public function wcpix_load_scripts(){
-		// load the main css scripts file
-		wp_enqueue_style( 'wcpix-styles-css', plugins_url( '/css/styles.css', __FILE__ ) );
 
 		// load the main js scripts file
 		wp_enqueue_script( 'wcpix-main-js', plugins_url( '/js/main.js', __FILE__ ), array('jquery'));
@@ -334,12 +332,12 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 		}
 		if (!empty($pix)) {
 			?>
-			<div class="wcpix-container">
+			<div class="wcpix-container" style="text-align: center;margin: 20px 0">
 				<input type="hidden" value="<?php echo $pix['link']; ?>" id="copiar">
 				<img  style="cursor:pointer; display: initial;" class="wcpix-img-copy-code" onclick="copyCode()" src="<?php echo $pix['image']; ?>" alt="QR Code" />
-				<br><br><p class="wcpix-p"><?php echo $pix['link']; ?></p>
+				<br><br><p class="wcpix-p" style="font-size: 14px;margin-bottom:0"><?php echo $pix['link']; ?></p>
 				<br><button class="button wcpix-button-copy-code" style="margin-bottom: 20px;" onclick="copyCode()"><?php echo __('Clique aqui para copiar o Código acima', 'woocommerce-pix'); ?> </button><br>
-				<div class="wcpix-response-output inactive" aria-hidden="true" style=""><?php echo __('O código foi copiado para a área de transferência.', 'woocommerce-pix'); ?></div>
+				<div class="wcpix-response-output inactive" style="margin: 2em 0.5em 1em;padding: 0.2em 1em;border: 2px solid #46b450;display: none;" aria-hidden="true" style=""><?php echo __('O código foi copiado para a área de transferência.', 'woocommerce-pix'); ?></div>
 			</div>
 			<script>
 				function copyCode() {
