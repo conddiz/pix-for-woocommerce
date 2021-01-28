@@ -4,7 +4,7 @@
  * Gateway class
  *
  * @package Pix_For_WooCommerce/Classes/Gateway
- * @version 1.1.2
+ * @version 1.2.1
  */
 
 if (!defined('ABSPATH')) {
@@ -24,7 +24,7 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 	{
 		$this->domain             = 'woocommerce-pix';
 		$this->id                 = 'pix_gateway';
-		$this->icon               = apply_filters('woocommerce_offline_icon', '');
+		$this->icon               = apply_filters('woocommerce_gateway_icon', WC_PIX_PLUGIN_URL.'assets/icon-pix.png');
 		$this->has_fields         = false;
 		$this->method_title       = __('Pix', $this->domain);
 		$this->method_description = __('Receba pagamentos via PIX', $this->domain);
@@ -361,13 +361,13 @@ class WC_Pix_Gateway extends WC_Payment_Gateway
 			if ($this->whatsapp || $this->telegram || $this->email) {
 				echo '<br>' . __('Você pode compartilhar conosco o comprovante via:', 'woocommerce-pix');
 				if ($this->whatsapp) {
-					echo ' <a style="margin-right: 15px;" target="_blank" href="https://wa.me/'.$this->whatsapp.'?text=Segue%20meu%20comprovante"> WhatsApp </a>';
+					echo ' <a style="margin-right: 15px;" target="_blank" href="https://wa.me/'.$this->whatsapp.'?text=Segue%20meu%20comprovante%20para%20o%20pedido%20'.$order_id.'"> WhatsApp </a>';
 				}
 				if ($this->telegram) {
-					echo ' <a style="margin-right: 15px;" target="_blank" href="https://t.me/'.$this->telegram.'?text=Segue%20meu%20comprovante">Telegram </a>';
+					echo ' <a style="margin-right: 15px;" target="_blank" href="https://t.me/'.$this->telegram.'?text=Segue%20meu%20comprovante%20para%20o%20pedido%20'.$order_id.'">Telegram </a>';
 				}
 				if ($this->email) {
-					echo ' <a style="margin-right: 15px;" target="_blank" href="mailto:'.$this->email.'">Email.</a>';
+					echo ' <a style="margin-right: 15px;" target="_blank" href="mailto:'.$this->email.'?subject=Comprovante%20pedido%20'.$order_id.'&body=Segue%20meu%20comprovante%20anexo%20para%20o%20pedido%20'.$order_id.'">Email.</a>';
 				}
 			}
 
