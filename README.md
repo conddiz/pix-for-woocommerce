@@ -11,7 +11,7 @@ Tested up to: 5.6
 
 Requires PHP: 7.1
 
-Stable Tag: 1.2.0
+Stable Tag: 1.2.1
 
 License: GPLv3.0
 
@@ -95,3 +95,6 @@ You can contribute with the code on [GitHub](https://github.com/InCuca/woocommer
 
 * New QR Code generator to lower PHP requirements
 
+= 2021.01.28 - version 1.2.1 =
+
+* Icon and order id on share
